@@ -7,8 +7,6 @@
     "ramda": "0.26.1",
     "rxdb": "8.7.4",
     "socket.io": "2.3.0",
-    "service": "git://github.com/milespeebles/service.git",
     "toolbelt": "git://github.com/milespeebles/toolbelt.git",
-    "tags": "git://github.com/milespeebles/tags.git"
   }
 }
