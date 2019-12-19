@@ -1,0 +1,14 @@
+{
+  "name": "service",
+  "version": "0.1.0",
+  "license": "MIT",
+  "dependencies": {
+    "pouchdb-adapter-leveldb": "7.1.1",
+    "ramda": "0.26.1",
+    "rxdb": "8.7.4",
+    "socket.io": "2.3.0",
+    "service": "file:../service",
+    "toolbelt": "file:../toolbelt",
+    "tags": "file:../tags"
+  }
+}
