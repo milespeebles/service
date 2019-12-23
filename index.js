@@ -59,23 +59,30 @@ const Service = async func => {
 
   // api
   const Collection = async (name, schema) => {
-    const collection = await db.collection ({
-      name,
-      schema,
-    })
+    const existing = db[name]
+    let collection
 
-    collection.sync ({
-      remote: 'http://localhost:8080/data',
-      waitForLeadership: true,
-      direction: {
-        pull: true,
-        push: true,
-      },
-      options: {
-        live: true,
-        retry: true,
-      },
-    })
+    if (db[name]) {
+      collection = existing
+    } else {
+      collection = await db.collection ({
+        name,
+        schema,
+      })
+
+      collection.sync ({
+        remote: 'http://localhost:8080/data',
+        waitForLeadership: true,
+        direction: {
+          pull: true,
+          push: true,
+        },
+        options: {
+          live: true,
+          retry: true,
+        },
+      })
+    }
 
     return collection
   }
