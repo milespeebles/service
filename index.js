@@ -27,7 +27,8 @@ import Express from 'express'
 import Socket from 'socket.io'
 // import mergeDeepRight from 'ramda/src/me'pouchdb-adapter-http'rgeDeepRight'
 
-// Rxdb.plugin (leveldb)
+// Rxdb.plugin (memory)
+Rxdb.plugin (leveldb)
 Rxdb.plugin (http)
 
 // const DEFAULT_CONFIG = {
