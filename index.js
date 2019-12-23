@@ -20,14 +20,14 @@
 // https://mpd.home.os
 
 import Rxdb from 'rxdb'
-import leveldown from 'leveldown'
-import memory from 'pouchdb-adapter-memory'
+// import leveldown from 'leveldown'
+import leveldb from 'pouchdb-adapter-leveldb'
 import http from 'pouchdb-adapter-http'
 import Express from 'express'
 import Socket from 'socket.io'
 // import mergeDeepRight from 'ramda/src/me'pouchdb-adapter-http'rgeDeepRight'
 
-Rxdb.plugin (memory)
+// Rxdb.plugin (leveldb)
 Rxdb.plugin (http)
 
 // const DEFAULT_CONFIG = {
@@ -51,8 +51,9 @@ const Service = async func => {
   const options = {
     // name: `leveldb://${dbPath}/data`,
     // name: 'http://127.0.0.1:8080/data',
-    name: 'data',
-    adapter: 'memory',
+    // name: 'data',
+    name: `data`,
+    adapter: 'leveldb',
   }
 
   const db = await Rxdb.create (options)
