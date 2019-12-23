@@ -16,7 +16,7 @@ const options = {
 const main = async () => {
   const db = await Rxdb.create (options)
 
-  const {app, server} = db.server({
+  const { app, server } = db.server ({
     path: '/data',
     port: 8080,
     cors: false, // true
