@@ -51,7 +51,6 @@ const Service = async func => {
   const options = {
     // name: `leveldb://${dbPath}/data`,
     // name: 'http://127.0.0.1:8080/data',
-    name: 'data',
     adapter: 'memory',
   }
 
