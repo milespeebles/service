@@ -21,12 +21,12 @@
 
 import Rxdb from 'rxdb'
 import leveldown from 'leveldown'
-// import adapter from 'pouchdb-adapter-leveldb'
+import adapter from 'pouchdb-adapter-memory'
 import Express from 'express'
 import Socket from 'socket.io'
 // import mergeDeepRight from 'ramda/src/mergeDeepRight'
 
-// Rxdb.plugin (adapter)
+Rxdb.plugin (adapter)
 
 // const DEFAULT_CONFIG = {
 //   dbPath: '/db',
@@ -49,7 +49,7 @@ const Service = async func => {
   const options = {
     // name: `leveldb://${dbPath}/data`,
     name: 'http://localhost:8080/data',
-    // adapter: leveldown,
+    adapter: 'memory',
   }
 
   const db = await Rxdb.create (options)

@@ -5,6 +5,7 @@
   "dependencies": {
     "express-pouchdb": "^4.2.0",
     "pouchdb-adapter-leveldb": "7.1.1",
+    "pouchdb-adapter-memory": "^7.1.1",
     "ramda": "0.26.1",
     "rxdb": "8.7.4",
     "rxjs": "6.5.3",
