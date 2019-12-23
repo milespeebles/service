@@ -69,7 +69,7 @@ const Service = async func => {
         schema,
       })
 
-      const sync = collection.sync ({
+      collection.sync ({
         remote: 'http://127.0.0.1:8080/db',
         waitForLeadership: false,
         direction: {
@@ -81,14 +81,6 @@ const Service = async func => {
           retry: true,
         },
       })
-
-      sync.error$.subscribe (i => console.log ('error: ', i))
-      sync.change$.subscribe (i => console.log ('change: ', i))
-      sync.docs$.subscribe (i => console.log ('docs: ', i))
-      sync.denied$.subscribe (i => console.log ('denied: ', i))
-      sync.active$.subscribe (i => console.log ('active: ', i))
-      sync.alive$.subscribe (i => console.log ('alive: ', i))
-      sync.complete$.subscribe (i => console.log ('complete: ', i))
     }
 
     return collection
