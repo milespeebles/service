@@ -54,7 +54,6 @@ const Service = async (func, config = {}) => {
 
   const db = await Rxdb.create (options)
 
-  // api
   const states = await Promise.all (
     collections.map (async ({ name, schema }) => {
       const collection = await db.collection ({
@@ -92,6 +91,7 @@ const Service = async (func, config = {}) => {
     {},
   )
 
+  // api
   const api = {
     db,
     io,
