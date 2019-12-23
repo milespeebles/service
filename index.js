@@ -57,7 +57,7 @@ const Service = async func => {
   const db = await Rxdb.create (options)
 
   // api
-  const connect = async (name, schema) => {
+  const Collection = async (name, schema) => {
     const existing = db[name]
     let collection
 
@@ -81,13 +81,16 @@ const Service = async func => {
           retry: true,
         },
       })
+
+      sync.error$.subscribe (console.log)
     }
 
-    return [collection, sync]
+    return collection
   }
 
   const api = {
-    connect,
+    Collection,
+    db,
     io,
   }
 
