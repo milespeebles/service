@@ -83,11 +83,15 @@ const Service = async (func, config = {}) => {
           retry: true,
         },
       })
-    }
 
-    await collection
-      .find ()
-      .exec ()
+      await wait (2)
+
+      await collection
+        .find ()
+        .exec ()
+
+      await wait (2)
+    }
 
     return collection
   }
