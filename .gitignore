@@ -1,6 +1,6 @@
 ### Project specific
-dist/
-config.js
+pouch__all_dbs__
+log.txt
 
 # Created by https://www.gitignore.io/api/web,node,linux,macos,windows
 

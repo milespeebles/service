@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "license": "MIT",
   "dependencies": {
+    "express-pouchdb": "^4.2.0",
     "pouchdb-adapter-leveldb": "7.1.1",
     "ramda": "0.26.1",
     "rxdb": "8.7.4",
-    "rxjs": "^6.5.3",
+    "rxjs": "6.5.3",
     "socket.io": "2.3.0",
     "toolbelt": "git://github.com/milespeebles/toolbelt.git"
+  },
+  "devDependencies": {
+    "esm": "^3.2.25"
   }
 }
