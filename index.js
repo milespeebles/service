@@ -50,7 +50,7 @@ const Service = async func => {
   const options = {
     // name: `leveldb://${dbPath}/data`,
     // name: 'http://127.0.0.1:8080/data',
-    name: 'data',
+    name: 'db',
     adapter: 'memory',
   }
 
@@ -70,7 +70,7 @@ const Service = async func => {
       })
 
       const sync = collection.sync ({
-        remote: 'http://127.0.0.1:8080/data',
+        remote: 'http://127.0.0.1:8080/db',
         waitForLeadership: false,
         direction: {
           pull: true,
