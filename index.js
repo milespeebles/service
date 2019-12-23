@@ -33,14 +33,10 @@ const DEFAULT_CONFIG = {
   remote: 'http://localhost:8080/db',
 }
 
-const wait = seconds => new Promise (
-  resolve => setTimeout (resolve, seconds * 1000)
-)
+const Service = async func => {
+  const { type, collections = [] } = func
 
-const Service = async (func, config = {}) => {
-  const { type } = func
-
-  const { remote } = mergeDeepRight (DEFAULT_CONFIG, config)
+  const { remote} = mergeDeepRight (DEFAULT_CONFIG, config)
 
   // express
   const port = process.env.PORT || 3000
@@ -59,14 +55,9 @@ const Service = async (func, config = {}) => {
   const db = await Rxdb.create (options)
 
   // api
-  const Collection = async (name, schema) => {
-    const existing = db[name]
-    let collection
-
-    if (db[name]) {
-      collection = existing
-    } else {
-      collection = await db.collection ({
+  const result = await Promise.all (
+    collections.map (async ({ name, schema }) => {
+      const collection = await db.collection ({
         name,
         schema,
       })
@@ -84,22 +75,27 @@ const Service = async (func, config = {}) => {
         },
       })
 
-      await wait (2)
-
       await collection
         .find ()
         .exec ()
 
-      await wait (2)
-    }
+      return { name, collection }
+    })
+  )
 
-    return collection
-  }
+  const state = result.reduce (
+    (accumulator, ({ name, collection })) => {
+      accumulator[name] = collection
+
+      return accumulator
+    },
+    {},
+  )
 
   const api = {
-    Collection,
     db,
     io,
+    state,
   }
 
   // handlers
