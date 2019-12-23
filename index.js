@@ -21,7 +21,7 @@
 
 import Rxdb from 'rxdb'
 import leveldown from 'leveldown'
-import adapter from 'pouchdb-adapter-http'
+import adapter from 'pouchdb-adapter-memory'
 import Express from 'express'
 import Socket from 'socket.io'
 // import mergeDeepRight from 'ramda/src/me'pouchdb-adapter-http'rgeDeepRight'
@@ -48,18 +48,35 @@ const Service = async func => {
   // data
   const options = {
     // name: `leveldb://${dbPath}/data`,
-    name: 'http://127.0.0.1:8080/data',
-    adapter: 'http',
+    // name: 'http://127.0.0.1:8080/data',
+    name: 'data',
+    adapter: 'memory',
   }
 
   const db = await Rxdb.create (options)
 
   // api
-  const Collection = (name, schema) =>
-    db[name] || db.collection ({
+  const Collection = (name, schema) => {
+    const collection = db[name] || db.collection ({
       name,
       schema,
     })
+
+    collection.sync ({
+      remote: 'http://localhost:8080/data',
+      waitForLeadership: true,
+      direction: {
+        pull: true,
+        push: true,
+      },
+      options: {
+        live: true,
+        retry: true,
+      },
+    })
+
+    return collection
+  }
 
   const api = {
     Collection,
