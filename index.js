@@ -69,20 +69,20 @@ const Service = async func => {
         name,
         schema,
       })
-    }
 
-    collection.sync ({
-      remote: 'http://127.0.0.1:8080/data',
-      waitForLeadership: true,
-      direction: {
-        pull: true,
-        push: true,
-      },
-      options: {
-        live: true,
-        retry: true,
-      },
-    })
+      collection.sync ({
+        remote: 'http://127.0.0.1:8080/data',
+        waitForLeadership: true,
+        direction: {
+          pull: true,
+          push: true,
+        },
+        options: {
+          live: true,
+          retry: true,
+        },
+      })
+    }
 
     return collection
   }
