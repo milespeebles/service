@@ -30,13 +30,13 @@ Rxdb.plugin (memory)
 Rxdb.plugin (http)
 
 const DEFAULT_CONFIG = {
-  dbUrl: 'http://localhost:8080',
+  remote: 'http://localhost:8080/db',
 }
 
 const Service = async (func, config = {}) => {
   const { type } = func
 
-  const { dbUrl } = mergeDeepRight (DEFAULT_CONFIG, config)
+  const { remote } = mergeDeepRight (DEFAULT_CONFIG, config)
 
   // express
   const port = process.env.PORT || 3000
@@ -68,7 +68,7 @@ const Service = async (func, config = {}) => {
       })
 
       collection.sync ({
-        remote: `${dbUrl}/db`,
+        remote,
         waitForLeadership: false,
         direction: {
           pull: true,
