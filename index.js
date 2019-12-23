@@ -33,6 +33,10 @@ const DEFAULT_CONFIG = {
   remote: 'http://localhost:8080/db',
 }
 
+const wait = seconds => new Promise (
+  resolve => setTimeout (resolve, seconds * 1000)
+)
+
 const Service = async (func, config = {}) => {
   const { type } = func
 
@@ -80,6 +84,10 @@ const Service = async (func, config = {}) => {
         },
       })
     }
+
+    await collection
+      .find ()
+      .exec ()
 
     return collection
   }
