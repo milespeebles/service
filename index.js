@@ -33,7 +33,7 @@ const DEFAULT_CONFIG = {
   remote: 'http://localhost:8080/db',
 }
 
-const Service = async func => {
+const Service = async (func, config = {}) => {
   const { type, collections = [] } = func
 
   const { remote } = mergeDeepRight (DEFAULT_CONFIG, config)
