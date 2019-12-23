@@ -21,12 +21,14 @@
 
 import Rxdb from 'rxdb'
 import leveldown from 'leveldown'
-import adapter from 'pouchdb-adapter-memory'
+import memory from 'pouchdb-adapter-memory'
+import http from 'pouchdb-adapter-http'
 import Express from 'express'
 import Socket from 'socket.io'
 // import mergeDeepRight from 'ramda/src/me'pouchdb-adapter-http'rgeDeepRight'
 
-Rxdb.plugin (adapter)
+Rxdb.plugin (memory)
+Rxdb.plugin (http)
 
 // const DEFAULT_CONFIG = {
 //   dbPath: '/db',
