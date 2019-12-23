@@ -82,13 +82,13 @@ const Service = async func => {
         },
       })
 
-      sync.error$.subscribe (console.log)
-      sync.change$.subscribe (console.log)
-      sync.docs$.subscribe (console.log)
-      sync.denied$.subscribe (console.log)
-      sync.active$.subscribe (console.log)
-      sync.alive$.subscribe (console.log)
-      sync.complete$.subscribe (console.log)
+      sync.error$.subscribe (i => console.log ('error: ', i))
+      sync.change$.subscribe (i => console.log ('change: ', i))
+      sync.docs$.subscribe (i => console.log ('docs: ', i))
+      sync.denied$.subscribe (i => console.log ('denied: ', i))
+      sync.active$.subscribe (i => console.log ('active: ', i))
+      sync.alive$.subscribe (i => console.log ('alive: ', i))
+      sync.complete$.subscribe (i => console.log ('complete: ', i))
     }
 
     return collection
