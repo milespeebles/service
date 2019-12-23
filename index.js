@@ -29,14 +29,14 @@ import Socket from 'socket.io'
 Rxdb.plugin (memory)
 Rxdb.plugin (http)
 
-// const DEFAULT_CONFIG = {
-//   dbPath: '/db',
-// }
+const DEFAULT_CONFIG = {
+  dbUrl: 'http://localhost:8080',
+}
 
-const Service = async func => {
+const Service = async (func, config) => {
   const { type } = func
 
-  // const { dbPath } = mergeDeepRight (DEFAULT_CONFIG, config)
+  const { dbUrl } = mergeDeepRight (DEFAULT_CONFIG, config)
 
   // express
   const port = process.env.PORT || 3000
@@ -70,7 +70,7 @@ const Service = async func => {
       })
 
       collection.sync ({
-        remote: 'http://192.168.50.202:8080/db',
+        remote: `${dbUrl}/db`,
         waitForLeadership: false,
         direction: {
           pull: true,
