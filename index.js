@@ -23,16 +23,24 @@ import Rxdb from 'rxdb'
 import memory from 'pouchdb-adapter-memory'
 import http from 'pouchdb-adapter-http'
 import Express from 'express'
-import Socket from 'socket.io'
+import multer from 'multer'
+// import Socket from 'socket.io'
 import mergeDeepRight from 'ramda/src/mergeDeepRight'
 
-Rxdb.plugin (memory)
-Rxdb.plugin (http)
-
+// constants
 const DEFAULT_CONFIG = {
   remote: 'http://localhost:8080/db',
 }
 
+// rxdb
+Rxdb.plugin (memory)
+Rxdb.plugin (http)
+
+// multer
+const storage = multer.memoryStorage ()
+const fileUpload = multer ({ storage })
+
+// service
 const Service = async (func, config = {}) => {
   const { type, collections = [] } = func
 
@@ -42,9 +50,12 @@ const Service = async (func, config = {}) => {
   const port = process.env.PORT || 3000
   const app = Express ()
   const server = app.listen (port)
+  const upload = fileUpload.single ('data')
+
+  app.use (Express.json ())
 
   // socket.io
-  const io = Socket (server)
+  // const io = Socket (server)
 
   // data
   const options = {
@@ -93,8 +104,9 @@ const Service = async (func, config = {}) => {
 
   // api
   const api = {
+    // io,
     db,
-    io,
+    upload,
     state,
   }
 
@@ -105,11 +117,11 @@ const Service = async (func, config = {}) => {
     app.use ('/', (req, res) => callback ({ req, res, ...api }))
   }
 
-  if (type === 'socket') {
-    const { callback } = func
+  // if (type === 'socket') {
+  //   const { callback } = func
 
-    io.on ('connection', socket => callback ({ socket, ...api }))
-  }
+  //   io.on ('connection', socket => callback ({ socket, ...api }))
+  // }
 
   if (type === 'process') {
     const { callback } = func

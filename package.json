@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "dependencies": {
+    "multer": "1.4.2",
     "pouchdb-adapter-http": "7.1.1",
     "pouchdb-adapter-memory": "7.1.1",
     "pouchdb-server": "4.2.0",
