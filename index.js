@@ -20,15 +20,13 @@
 // https://mpd.home.os
 
 import Rxdb from 'rxdb'
-// import leveldown from 'leveldown'
-import leveldb from 'pouchdb-adapter-leveldb'
+import memory from 'pouchdb-adapter-memory'
 import http from 'pouchdb-adapter-http'
 import Express from 'express'
 import Socket from 'socket.io'
-// import mergeDeepRight from 'ramda/src/me'pouchdb-adapter-http'rgeDeepRight'
+// import mergeDeepRight from 'ramda/src/mergeDeepRight'
 
-// Rxdb.plugin (memory)
-Rxdb.plugin (leveldb)
+Rxdb.plugin (memory)
 Rxdb.plugin (http)
 
 // const DEFAULT_CONFIG = {
@@ -52,15 +50,14 @@ const Service = async func => {
   const options = {
     // name: `leveldb://${dbPath}/data`,
     // name: 'http://127.0.0.1:8080/data',
-    // name: 'data',
-    name: `data`,
-    adapter: 'leveldb',
+    name: 'data',
+    adapter: 'memory',
   }
 
   const db = await Rxdb.create (options)
 
   // api
-  const Collection = async (name, schema) => {
+  const connect = async (name, schema) => {
     const existing = db[name]
     let collection
 
@@ -72,7 +69,7 @@ const Service = async func => {
         schema,
       })
 
-      collection.sync ({
+      const sync = collection.sync ({
         remote: 'http://127.0.0.1:8080/data',
         waitForLeadership: false,
         direction: {
@@ -86,12 +83,11 @@ const Service = async func => {
       })
     }
 
-    return collection
+    return [collection, sync]
   }
 
   const api = {
-    Collection,
-    db,
+    connect,
     io,
   }
 
