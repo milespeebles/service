@@ -33,7 +33,7 @@ const DEFAULT_CONFIG = {
   dbUrl: 'http://localhost:8080',
 }
 
-const Service = async (func, config) => {
+const Service = async (func, config = {}) => {
   const { type } = func
 
   const { dbUrl } = mergeDeepRight (DEFAULT_CONFIG, config)
