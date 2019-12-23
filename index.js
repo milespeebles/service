@@ -26,16 +26,16 @@ import Express from 'express'
 import Socket from 'socket.io'
 import mergeDeepRight from 'ramda/src/mergeDeepRight'
 
-import defaultConfig from './config.dist'
-import config from './config'
-
 Rxdb.plugin (adapter)
 
-const Service = async func => {
+const DEFAULT_CONFIG = {
+  dbPath: '/db',
+}
+
+const Service = async (func, config = {}) => {
   const { type } = func
 
-  // config
-  const { dbUrl, dbPath } = mergeDeepRight (defaultConfig, config)
+  const { dbPath } = mergeDeepRight (DEFAULT_CONFIG, config)
 
   // express
   const port = process.env.PORT || 3000
