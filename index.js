@@ -58,8 +58,8 @@ const Service = async func => {
   const db = await Rxdb.create (options)
 
   // api
-  const Collection = (name, schema) => {
-    const collection = db[name] || db.collection ({
+  const Collection = async (name, schema) => {
+    const collection = await db.collection ({
       name,
       schema,
     })
