@@ -24,7 +24,7 @@ import memory from 'pouchdb-adapter-memory'
 import http from 'pouchdb-adapter-http'
 import Express from 'express'
 import Socket from 'socket.io'
-// import mergeDeepRight from 'ramda/src/mergeDeepRight'
+import mergeDeepRight from 'ramda/src/mergeDeepRight'
 
 Rxdb.plugin (memory)
 Rxdb.plugin (http)
