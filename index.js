@@ -72,7 +72,7 @@ const Service = async func => {
     }
 
     collection.sync ({
-      remote: 'http://localhost:8080/data',
+      remote: 'http://127.0.0.1:8080/data',
       waitForLeadership: true,
       direction: {
         pull: true,
