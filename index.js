@@ -79,10 +79,6 @@ const Service = async (func, config = {}) => {
           retry: true,
         },
       })
-
-      await collection
-        .find()
-        .exec()
     }
 
     return collection
