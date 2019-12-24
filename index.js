@@ -106,7 +106,6 @@ const Service = async (func, config = {}) => {
   const api = {
     // io,
     db,
-    upload,
     state,
   }
 
@@ -114,7 +113,7 @@ const Service = async (func, config = {}) => {
   if (type === 'request') {
     const { callback } = func
 
-    app.use ('/', (req, res) => callback ({ req, res, ...api }))
+    app.use ('/', (req, upload, res) => callback ({ req, res, ...api }))
   }
 
   // if (type === 'socket') {
